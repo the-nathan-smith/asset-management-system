@@ -21,7 +21,7 @@ class Laptop(models.Model):
 
 
     def __str__(self):
-        return 'Type : {0} Owner: {1} Status: {2}'.format(self.type, self.owner, self.status)
+        return 'Type: {0} | Owner: {1} | Status: {2}'.format(self.type, self.owner, self.status)
 
 
 class Mobile(models.Model):
@@ -43,4 +43,4 @@ class Mobile(models.Model):
 
 
     def __str__(self):
-        return 'Type : {0} Owner: {1} Status: {2}'.format(self.type, self.owner, self.status)
+        return 'Type: {0} | Owner: {1} | Status: {2}'.format(self.type, self.owner, self.status)
