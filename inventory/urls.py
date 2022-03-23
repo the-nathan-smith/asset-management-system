@@ -8,4 +8,7 @@ urlpatterns = [
 
     re_path(r'^add_laptop$', add_laptop, name='add_laptop'),
     re_path(r'^add_mobile$', add_mobile, name='add_mobile'),
+
+    re_path(r'^edit_laptop/(?P<pk>\d+)$', edit_laptop, name='edit_laptop'),
+    re_path(r'^edit_mobile/(?P<pk>\d+)$', edit_mobile, name='edit_mobile'),
 ]

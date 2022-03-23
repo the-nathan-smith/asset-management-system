@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from inventory.forms import *
 from .models import *
@@ -44,3 +44,25 @@ def add_laptop(request):
 
 def add_mobile(request):
     return add_device(request, MobileForm)
+
+
+def edit_device(request, pk, model, cls):
+    item = get_object_or_404(model, pk=pk)
+
+    if request.method == 'POST':
+        form = cls(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    else:
+        form = cls(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
+
+def edit_laptop(request, pk):
+    return edit_device(request, pk, Laptop, LaptopForm)
+
+
+def edit_mobile(request, pk):
+    return edit_device(request, pk, Mobile, MobileForm)
