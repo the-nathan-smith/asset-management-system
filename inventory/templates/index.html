@@ -2,10 +2,10 @@
 {% block body%}
 
     <div class="button-group">
-        <a href="#" class="btn btn-primary btn-md" role="button">Laptops</a>
+        <a href="{% url 'display_laptops' %}" class="btn btn-primary btn-md" role="button">Laptops</a>
         <a href="#" class="btn btn-warning btn-sm" role="button"> +</a>
 
-        <a href="#" class="btn btn-primary btn-md" role="button">Mobiles</a>
+        <a href="{% url 'display_mobiles' %}" class="btn btn-primary btn-md" role="button">Mobiles</a>
         <a href="#" class="btn btn-warning btn-sm" role="button"> +</a>
     </div>
 
@@ -19,7 +19,16 @@
             </tr>
         </thead>
         <tbody>
+            {% for item in items %}
 
+                <tr>
+                    <td>{{ item.pk }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.owner }}</td>
+                    <td>{{ item.status }}</td>
+                </tr>
+
+            {% endfor %}
         </tbody>
     </table>
 
