@@ -31,10 +31,12 @@
                     {% if header == "Laptops" %}
                     <td>
                         <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                        <a href="{% url 'delete_laptop' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
                     </td>
                     {% elif header == "Mobiles" %}
                     <td>
                         <a href="{% url 'edit_mobile' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                        <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
                     </td>
                     {% endif %}
                 </tr>

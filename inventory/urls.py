@@ -11,4 +11,7 @@ urlpatterns = [
 
     re_path(r'^edit_laptop/(?P<pk>\d+)$', edit_laptop, name='edit_laptop'),
     re_path(r'^edit_mobile/(?P<pk>\d+)$', edit_mobile, name='edit_mobile'),
+
+    re_path(r'^delete_laptop/(?P<pk>\d+)$', delete_laptop, name='delete_laptop'),
+    re_path(r'^delete_mobile/(?P<pk>\d+)$', delete_mobile, name='delete_mobile'),
 ]
