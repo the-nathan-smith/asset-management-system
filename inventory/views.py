@@ -4,7 +4,7 @@ from inventory.forms import *
 from .models import *
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'inventory/index.html')
 
 
 def display_laptops(request):
@@ -13,7 +13,7 @@ def display_laptops(request):
         'items' : items,
         'header' : 'Laptops',
     }
-    return render(request, 'index.html', context)
+    return render(request, 'inventory/index.html', context)
 
 
 def display_mobiles(request):
@@ -22,7 +22,7 @@ def display_mobiles(request):
         'items' : items,
         'header' : 'Mobiles',
     }
-    return render(request, 'index.html', context)
+    return render(request, 'inventory/index.html', context)
 
 
 def add_device(request, cls):
@@ -35,7 +35,7 @@ def add_device(request, cls):
 
     else :
         form = cls()
-        return render(request, 'add_new.html', {'form': form})
+        return render(request, 'inventory/add_new.html', {'form': form})
 
 
 def add_laptop(request):
@@ -57,7 +57,7 @@ def edit_device(request, pk, model, cls):
 
     else:
         form = cls(instance=item)
-        return render(request, 'edit_item.html', {'form': form})
+        return render(request, 'inventory/edit_item.html', {'form': form})
 
 
 def edit_laptop(request, pk):
@@ -75,7 +75,7 @@ def delete_laptop(request, pk):
         'items': items
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'inventory/index.html', context)
 
 
 def delete_mobile(request, pk):
@@ -85,4 +85,4 @@ def delete_mobile(request, pk):
         'items': items
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'inventory/index.html', context)
