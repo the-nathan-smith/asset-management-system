@@ -1,6 +1,5 @@
-from sys import flags
-from telnetlib import STATUS
 from django.db import models
+from django.contrib.auth.models import User
 
 class Laptop(models.Model):
     type_choices = (
@@ -10,7 +9,7 @@ class Laptop(models.Model):
     )
     type = models.CharField(max_length=100, choices=type_choices, blank=False)
 
-    owner = models.CharField(max_length=100, blank=False) #This needs changing to a User
+    owner = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
     status_choices = (
         ('AVAILABLE', 'Device is available to be assigned'),
@@ -32,7 +31,7 @@ class Mobile(models.Model):
     )
     type = models.CharField(max_length=100, choices=type_choices, blank=False)
 
-    owner = models.CharField(max_length=100, blank=False) #This needs changing to a User
+    owner = models.ForeignKey(User, blank=True, null=True,  on_delete=models.CASCADE)
 
     status_choices = (
         ('AVAILABLE', 'Device is available to be assigned'),
