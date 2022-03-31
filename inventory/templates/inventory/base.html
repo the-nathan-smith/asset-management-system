@@ -15,27 +15,37 @@
 
             <div class="collapse navbar-collapse" id="navbarsExample02">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'index' %}">
                     Home<span class="sr-only">(current)</span>
                   </a>
                 </li>
                 {% if user.is_authenticated %}
                   <li class="nav-item">
+                    <a class="nav-link" href="{% url 'display_laptops' %}">
+                      Laptops
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'display_mobiles' %}">
+                      Mobiles
+                    </a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">
                         Logout
-                      </a>
+                    </a>
                   </li>
                 {% else %}
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">
                         Login
-                      </a>
+                    </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'register_user' %}">
                         Register
-                      </a>
+                    </a>
                   </li>
                 {% endif %}
               </ul>

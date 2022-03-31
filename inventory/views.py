@@ -4,7 +4,10 @@ from inventory.forms import *
 from .models import *
 
 def index(request):
-    return render(request, 'inventory/index.html')
+    context = {
+        'header' : 'Home'
+    }
+    return render(request, 'inventory/index.html', context)
 
 
 def display_laptops(request):
