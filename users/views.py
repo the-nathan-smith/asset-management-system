@@ -4,40 +4,41 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterUserForm
 
+
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, ("Successfully logged in."))
-            return redirect('index')
+            return redirect("index")
         else:
             messages.success(request, ("There was an error loggin in, try again..."))
-            return redirect('login')
+            return redirect("login")
     else:
-        return render(request, 'authenticate/login.html', {})
+        return render(request, "authenticate/login.html", {})
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, ("Successfully logged out."))
-    return redirect('index')
+    return redirect("index")
 
 
 def register_user(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password1"]
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ("Account successfully registered!."))
-            return redirect('index')
+            return redirect("index")
     else:
         form = RegisterUserForm()
 
-    return render(request, 'authenticate/register_user.html', {"form": form})
+    return render(request, "authenticate/register_user.html", {"form": form})
