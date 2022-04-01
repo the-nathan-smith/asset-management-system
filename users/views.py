@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, EditProfileForm
 
 
 def login_user(request):
@@ -42,3 +41,17 @@ def register_user(request):
         form = RegisterUserForm()
 
     return render(request, "authenticate/register_user.html", {"form": form})
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        edit_profile_form = EditProfileForm(request.POST, instance=request.user)
+
+        if edit_profile_form.is_valid():
+            edit_profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect("index")
+    else:
+        edit_profile_form = EditProfileForm(instance=request.user)
+
+    return render(request, 'authenticate/edit_profile.html', {'form': edit_profile_form})
