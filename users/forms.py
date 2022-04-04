@@ -24,10 +24,10 @@ class EditProfileForm(forms.ModelForm):
     username = forms.CharField(max_length=100,
                                required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
-    firstname = forms.CharField(max_length=100,
+    first_name = forms.CharField(max_length=100,
                                required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
-    secondname = forms.CharField(max_length=100,
+    last_name = forms.CharField(max_length=100,
                                required=True,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(required=True,
@@ -35,4 +35,4 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'firstname', 'secondname', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']

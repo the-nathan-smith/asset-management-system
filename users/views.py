@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+
+from inventory.models import Laptop, Mobile
 from .forms import RegisterUserForm, EditProfileForm
 
 
@@ -43,6 +45,18 @@ def register_user(request):
     return render(request, "authenticate/register_user.html", {"form": form})
 
 
+def display_profile(request):
+    laptops = Laptop.objects.all()
+    mobiles = Mobile.objects.all()
+    context = {
+        "user": request.user,
+        "laptops": laptops,
+        "mobiles": mobiles,
+    }
+
+    return render(request, "authenticate/display_profile.html", context)
+
+
 def edit_profile(request):
     if request.method == 'POST':
         edit_profile_form = EditProfileForm(request.POST, instance=request.user)
@@ -50,7 +64,7 @@ def edit_profile(request):
         if edit_profile_form.is_valid():
             edit_profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect("index")
+            return redirect("display_profile")
     else:
         edit_profile_form = EditProfileForm(instance=request.user)
 
