@@ -8,6 +8,14 @@
         <li>First name: {{request.user.first_name}}</li>
         <li>Last name: {{request.user.last_name}}</li>
         <li>Email: {{request.user.email}}</li>
+        <li>
+            {% if request.user.is_superuser %}
+                Role: Admin
+            {% else %}
+                Role: Regular
+            {% endif %}
+        </li>
+
     </ul>
 
     <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit my info</a>
