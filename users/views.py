@@ -48,8 +48,10 @@ def register_user(request):
 def display_profile(request):
     laptops = Laptop.objects.all()
     mobiles = Mobile.objects.all()
+    date_joined = request.user.date_joined.strftime("%d %b %Y")
     context = {
         "user": request.user,
+        "date_joined": date_joined,
         "laptops": laptops,
         "mobiles": mobiles,
     }

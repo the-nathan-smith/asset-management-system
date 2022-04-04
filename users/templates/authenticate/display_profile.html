@@ -1,89 +1,98 @@
 {% extends 'inventory/base.html' %}
 {% block body%}
 
-    <h1>Profile</h1>
+    <h1>Hello, {{user.first_name}} {{user.last_name}}</h1>
 
-    <ul>
-        <li>Username: {{request.user.username}}</li>
-        <li>First name: {{request.user.first_name}}</li>
-        <li>Last name: {{request.user.last_name}}</li>
-        <li>Email: {{request.user.email}}</li>
-        <li>
-            {% if request.user.is_superuser %}
-                Role: Admin
-            {% else %}
-                Role: Regular
-            {% endif %}
-        </li>
+    <div class="profile row">
+        <div class="col-md-3">
+            <h2>My Info</h2>
+            <ul class="info">
+                <li>Username: {{user.username}}</li>
+                <li>First name: {{user.first_name}}</li>
+                <li>Last name: {{user.last_name}}</li>
+                <li>Email: {{user.email}}</li>
+                <li>
+                    {% if user.is_superuser %}
+                        Role: Admin
+                    {% else %}
+                        Role: Regular
+                    {% endif %}
+                </li>
+                <li>Date joined: {{date_joined}}</li>
+            </ul>
 
-    </ul>
+            <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit my info</a>
+        </div>
 
-    <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit my info</a>
-
-    <h2>My Laptop(s)</h2>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Owner</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for laptop in laptops %}
-                {% if laptop.owner.username == request.user.username %}
-
+        <div class="col-md-9">
+            <h2>My Laptop(s)</h2>
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>{{ laptop.pk }}</td>
-                        <td>{{ laptop.type }}</td>
-                        <td>{{ laptop.owner.username }}</td>
-                        <td>{{ laptop.status }}</td>
-                        <td>
-                            <a href="{% url 'edit_laptop' laptop.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                            {% if user.is_superuser %}
-                                <a href="{% url 'delete_laptop' laptop.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            {% endif %}
-                        </td>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
+                </thead>
+                <tbody>
+                    {% for laptop in laptops %}
+                        {% if laptop.owner.username == user.username %}
 
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
+                            <tr>
+                                <td>{{ laptop.pk }}</td>
+                                <td>{{ laptop.type }}</td>
+                                <td>{{ laptop.owner.username }}</td>
+                                <td>{{ laptop.status }}</td>
+                                <td>
+                                    <a href="{% url 'edit_laptop' laptop.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                    {% if user.is_superuser %}
+                                        <a href="{% url 'delete_laptop' laptop.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
 
-    <h2>My Mobile(s)</h2>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Owner</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for mobile in mobiles %}
-                {% if mobile.owner.username == request.user.username %}
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
 
+            <h2>My Mobile(s)</h2>
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>{{ mobile.pk }}</td>
-                        <td>{{ mobile.type }}</td>
-                        <td>{{ mobile.owner.username }}</td>
-                        <td>{{ mobile.status }}</td>
-                        <td>
-                            <a href="{% url 'edit_mobile' mobile.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                            {% if user.is_superuser %}
-                                <a href="{% url 'delete_mobile' mobile.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            {% endif %}
-                        </td>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
+                </thead>
+                <tbody>
+                    {% for mobile in mobiles %}
+                        {% if mobile.owner.username == user.username %}
 
-                {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
+                            <tr>
+                                <td>{{ mobile.pk }}</td>
+                                <td>{{ mobile.type }}</td>
+                                <td>{{ mobile.owner.username }}</td>
+                                <td>{{ mobile.status }}</td>
+                                <td>
+                                    <a href="{% url 'edit_mobile' mobile.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                    {% if user.is_superuser %}
+                                        <a href="{% url 'delete_mobile' mobile.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
 {% endblock %}

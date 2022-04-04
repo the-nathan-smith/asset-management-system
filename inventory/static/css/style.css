@@ -7,3 +7,10 @@
 form .btn-primary {
     margin: 20px 0px 0px 15px;
 }
+.profile.row {
+    padding-top: 20px;
+}
+.profile, .info {
+    padding: 0;
+    list-style-type: none;
+}
