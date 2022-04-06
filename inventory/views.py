@@ -34,6 +34,7 @@ def add_device(request, cls):
 
         if form.is_valid():
             form.save()
+            messages.success(request, ("Device added successfully."))
             return redirect("index")
 
     else:

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/bc0ee498-52e7-4d37-8d6d-73c3a4dc90b2/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/nathan-smith-asset-management-system",
+    "appService.deploySubpath": "."
+}

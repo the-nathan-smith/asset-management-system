@@ -1,0 +1,16 @@
+.main-body {
+    padding: 20px 0px 20px 0px;
+}
+.table {
+    margin: 10px 0px 10px 0px;
+}
+form .btn-primary {
+    margin: 20px 0px 0px 15px;
+}
+.profile.row {
+    padding-top: 20px;
+}
+.profile, .info {
+    padding: 0;
+    list-style-type: none;
+}
