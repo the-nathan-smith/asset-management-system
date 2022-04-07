@@ -60,14 +60,16 @@ def display_profile(request):
 
 
 def edit_profile(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         edit_profile_form = EditProfileForm(request.POST, instance=request.user)
 
         if edit_profile_form.is_valid():
             edit_profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
+            messages.success(request, "Your profile is updated successfully")
             return redirect("display_profile")
     else:
         edit_profile_form = EditProfileForm(instance=request.user)
 
-    return render(request, 'authenticate/edit_profile.html', {'form': edit_profile_form})
+    return render(
+        request, "authenticate/edit_profile.html", {"form": edit_profile_form}
+    )
