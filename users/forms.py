@@ -8,6 +8,10 @@ class RegisterUserForm(UserCreationForm):
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
 
+    # We have two password fields here so that we can
+    # get the user to validate that they know their
+    # password by typing it in twice and then checking
+    # those two values match
     class Meta:
         model = User
         fields = (
@@ -20,6 +24,9 @@ class RegisterUserForm(UserCreationForm):
         )
 
 
+# We only want the user to be able to edit first_name,
+# last_name and email as username is what they use to
+# login and would bring added complexity to editting this field
 class EditProfileForm(forms.ModelForm):
     first_name = forms.CharField(
         max_length=100,
