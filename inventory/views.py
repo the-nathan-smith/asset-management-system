@@ -10,6 +10,7 @@ def index(request):
     return render(request, "inventory/index.html", context)
 
 
+# Passes a list of all laptop objects to the template
 def display_laptops(request):
     items = Laptop.objects.all()
     context = {
@@ -19,6 +20,7 @@ def display_laptops(request):
     return render(request, "inventory/index.html", context)
 
 
+# Passes a list of all mobile objects to the template
 def display_mobiles(request):
     items = Mobile.objects.all()
     context = {
@@ -28,9 +30,11 @@ def display_mobiles(request):
     return render(request, "inventory/index.html", context)
 
 
-def add_device(request, cls):
+# This function reduces code duplication and is used to add both
+# laptops and mobile devices
+def add_device(request, deviceForm):
     if request.method == "POST":
-        form = cls(request.POST)
+        form = deviceForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -38,7 +42,7 @@ def add_device(request, cls):
             return redirect("index")
 
     else:
-        form = cls()
+        form = deviceForm()
         return render(request, "inventory/add_new.html", {"form": form})
 
 
@@ -50,6 +54,8 @@ def add_mobile(request):
     return add_device(request, MobileForm)
 
 
+# Similar to add_device this function reduces code duplication
+# as it is used to edit both laptops and mobiles
 def edit_device(request, pk, model, form, deviceType):
     item = get_object_or_404(model, pk=pk)
     items = model.objects.all()
@@ -77,19 +83,18 @@ def edit_mobile(request, pk):
     return edit_device(request, pk, Mobile, MobileForm, deviceType)
 
 
-def delete_laptop(request, pk):
-    Laptop.objects.filter(id=pk).delete()
-    items = Laptop.objects.all()
-    context = {"items": items, "header": "Laptops"}
+def delete_device(request, model, pk, deviceType):
+    model.objects.filter(id=pk).delete()
+    items = model.objects.all()
+    context = {"items": items, "header": deviceType}
     messages.success(request, ("Device successfully deleted."))
 
     return render(request, "inventory/index.html", context)
+
+
+def delete_laptop(request, pk):
+    return delete_device(request, Laptop, pk, "Laptops")
 
 
 def delete_mobile(request, pk):
-    Mobile.objects.filter(id=pk).delete()
-    items = Mobile.objects.all()
-    context = {"items": items, "header": "Mobiles"}
-    messages.success(request, ("Device successfully deleted."))
-
-    return render(request, "inventory/index.html", context)
+    return delete_device(request, Mobile, pk, "Mobiles")
