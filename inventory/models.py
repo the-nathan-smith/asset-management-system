@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# Defines the database structure for Laptop objects
 class Laptop(models.Model):
     type_choices = (
         ("SURFACEPRO", "Surface Pro"),
@@ -25,6 +26,7 @@ class Laptop(models.Model):
         )
 
 
+# Defines the database structure for Mobile objects
 class Mobile(models.Model):
     type_choices = (
         ("ANDROID", "Android"),
