@@ -1,10 +1,10 @@
 name: Lint
 on: [push]
 jobs:
-  Install_and_run_Black:
+  Install_and_run_flake8:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: pip install black
-      - run: black ${{ github.workspace }}
+      - run: pip install flake8
+      - run: flake8 ${{ github.workspace }}
