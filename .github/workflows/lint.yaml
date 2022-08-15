@@ -4,5 +4,7 @@ jobs:
   Install_and_run_Black:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
       - run: pip install black
-      - run: black .
+      - run: black ${{ github.workspace }}
