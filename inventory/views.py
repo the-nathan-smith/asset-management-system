@@ -54,7 +54,7 @@ def add_mobile(request):
     return add_device(request, MobileForm)
 
 
-# Similar to add_device this function reduces code duplication
+# Similar to add_device this function reduces code duplication
 # as it is used to edit both laptops and mobiles
 def edit_device(request, pk, model, form, deviceType):
     item = get_object_or_404(model, pk=pk)
