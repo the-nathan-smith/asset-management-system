@@ -1,0 +1,8 @@
+name: Lint
+on: [push]
+jobs:
+  Install_and_run_Black:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install black
+      - run: black .
