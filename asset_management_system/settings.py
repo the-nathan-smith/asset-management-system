@@ -25,10 +25,15 @@ SECRET_KEY = "django-insecure-8o&0b81yi0&-(rk2vh2u6#)8(#%4d1ms%%@7gb$)mgtrk%akex
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["nathan-smith-asset-management-system.azurewebsites.net", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "nathan-smith-asset-management-system.azurewebsites.net",
+    "127.0.0.1",
+    "https://asset-management-system-app.herokuapp.com",
+    ]
 CSRF_TRUSTED_ORIGINS = [
     "https://nathan-smith-asset-management-system.azurewebsites.net",
     "https://127.0.0.1",
+    "https://asset-management-system-app.herokuapp.com",
 ]
 
 
