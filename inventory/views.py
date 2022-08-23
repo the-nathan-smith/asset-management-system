@@ -32,7 +32,7 @@ def display_mobiles(request):
 
 # This function reduces code duplication and is used to add both
 # laptops and mobile devices
-def add_device(request, deviceForm):
+def add_device(request, deviceForm, header):
     if request.method == "POST":
         form = deviceForm(request.POST)
 
@@ -43,15 +43,19 @@ def add_device(request, deviceForm):
 
     else:
         form = deviceForm()
-        return render(request, "inventory/add_new.html", {"form": form})
+        context = {
+            "form": form,
+            "header": header
+        }
+        return render(request, "inventory/add_new.html", context)
 
 
 def add_laptop(request):
-    return add_device(request, LaptopForm)
+    return add_device(request, LaptopForm, "Laptop")
 
 
 def add_mobile(request):
-    return add_device(request, MobileForm)
+    return add_device(request, MobileForm, "Mobile")
 
 
 # Similar to add_device this function reduces code duplication
