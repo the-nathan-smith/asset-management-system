@@ -3,66 +3,78 @@
 
     <h1>{{ header }}</h1>
 
-    <div class="button-group">
-        {% if header == "Laptops" %}
-            <a href="{% url 'add_laptop' %}" class="btn btn-warning btn-sm" role="button">Add Laptop</a>
-        {% elif header == "Mobiles" %}
-            <a href="{% url 'add_mobile' %}" class="btn btn-warning btn-sm" role="button">Add Mobile</a>
-        {% endif %}
-    </div>
+    {% if user.is_authenticated %}
 
-    {% if header == "Home" %}
-        <h2>Welcome to the Asset Management System for NHSD</h2>
+        {% if header == "Home" %}
 
-        {% if user.is_authenticated %}
+            <h2>Welcome to the Asset Management System for NHSD</h2>
             <p>Please select from one of the two following options</p>
             <a href="{% url 'display_laptops' %}" class="btn btn-primary btn-md" role="button">Laptops</a>
             <a href="{% url 'display_mobiles' %}" class="btn btn-primary btn-md" role="button">Mobiles</a>
+
         {% else %}
-            <p>Please login or register an account to access this system</p>
-            <a href="{% url 'login' %}" class="btn btn-primary btn-md" role="button">Login</a>
-            <a href="{% url 'register_user' %}" class="btn btn-primary btn-md" role="button">Register</a>
+
+            <div class="button-group">
+                {% if header == "Laptops" %}
+                    <a href="{% url 'add_laptop' %}" class="btn btn-warning btn-sm" role="button">Add Laptop</a>
+                {% elif header == "Mobiles" %}
+                    <a href="{% url 'add_mobile' %}" class="btn btn-warning btn-sm" role="button">Add Mobile</a>
+                {% endif %}
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Owner</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <td>{{ item.pk }}</td>
+                            <td>{{ item.type }}</td>
+                            <td>{{ item.owner.username }}</td>
+                            <td>{{ item.status }}</td>
+                            {% if header == "Laptops" %}
+                            <td>
+                                <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                {% if user.is_superuser %}
+                                    <a href="{% url 'delete_laptop' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                                {% endif %}
+                            </td>
+                            {% elif header == "Mobiles" %}
+                            <td>
+                                <a href="{% url 'edit_mobile' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                                {% if user.is_superuser %}
+                                    <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                                {% endif %}
+                            </td>
+                            {% endif %}
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
         {% endif %}
 
     {% else %}
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Type</th>
-                    <th>Owner</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
 
-                    <tr>
-                        <td>{{ item.pk }}</td>
-                        <td>{{ item.type }}</td>
-                        <td>{{ item.owner.username }}</td>
-                        <td>{{ item.status }}</td>
-                        {% if header == "Laptops" %}
-                        <td>
-                            <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                            {% if user.is_superuser %}
-                                <a href="{% url 'delete_laptop' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            {% endif %}
-                        </td>
-                        {% elif header == "Mobiles" %}
-                        <td>
-                            <a href="{% url 'edit_mobile' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
-                            {% if user.is_superuser %}
-                                <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
-                            {% endif %}
-                        </td>
-                        {% endif %}
-                    </tr>
+        {% if header == "Home" %}
 
-                {% endfor %}
-            </tbody>
-        </table>
+            <h2>Welcome to the Asset Management System for NHSD</h2>
+
+        {% endif %}
+
+        <p>Please login or register an account to access this system</p>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-md" role="button">Login</a>
+        <a href="{% url 'register_user' %}" class="btn btn-primary btn-md" role="button">Register</a>
+
     {% endif %}
 
 {% endblock %}
