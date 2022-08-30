@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from inventory.models import Laptop, Mobile
 
+
 class LaptopModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -19,7 +20,7 @@ class LaptopModelTest(TestCase):
         laptop = Laptop.objects.get(id=1)
         max_length = laptop._meta.get_field('status').max_length
         self.assertEqual(max_length, 100)
-        
+
     def test_laptop_string_is_correctly_formatted(self):
         laptop = Laptop.objects.get(id=1)
         expected_string = f'Type: {laptop.type} | Owner: {laptop.owner} | Status: {laptop.status}'

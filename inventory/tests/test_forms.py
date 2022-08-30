@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from inventory.forms import LaptopForm, MobileForm
 
+
 class LaptopFormTest(TestCase):
     def testLaptopFormTypeLabel(self):
         form = LaptopForm()
