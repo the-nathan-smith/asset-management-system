@@ -8,52 +8,54 @@
 
     <body>
         <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Asset Management System</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+          <div class="container">
+              <a class="navbar-brand" href="#">Asset Management System</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
 
-            <div class="collapse navbar-collapse" id="navbarsExample02">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}">
-                    Home<span class="sr-only">(current)</span>
-                  </a>
-                </li>
-                {% if user.is_authenticated %}
+              <div class="collapse navbar-collapse" id="navbarsExample02">
+                <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'display_laptops' %}">
-                      Laptops
+                    <a class="nav-link" href="{% url 'index' %}">
+                      Home<span class="sr-only">(current)</span>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'display_mobiles' %}">
-                      Mobiles
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'display_profile' %}">
-                        Profile
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">
-                        Logout
-                    </a>
-                  </li>
-                {% else %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">
-                        Login
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register_user' %}">
-                        Register
-                    </a>
-                  </li>
-                {% endif %}
-              </ul>
+                  {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'display_laptops' %}">
+                        Laptops
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'display_mobiles' %}">
+                        Mobiles
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'display_profile' %}">
+                          Profile
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout' %}">
+                          Logout
+                      </a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">
+                          Login
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'register_user' %}">
+                          Register
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </div>
             </div>
           </nav>
 
