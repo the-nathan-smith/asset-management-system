@@ -38,6 +38,11 @@ class LaptopsListViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'inventory/edit_item.html')
 
+    def test_display_laptops_does_show_all_laptops(self):
+        response = self.client.get('/display_laptops')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['items']), 1)
+
 
 class MobilesListViewTest(TestCase):
     @classmethod
@@ -73,3 +78,8 @@ class MobilesListViewTest(TestCase):
         response = self.client.get('/edit_mobile/1')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'inventory/edit_item.html')
+
+    def test_display_mobiles_does_show_all_mobiles(self):
+        response = self.client.get('/display_mobiles')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['items']), 1)
